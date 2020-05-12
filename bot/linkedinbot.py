@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome()
@@ -32,9 +33,8 @@ for index in range(1,101):
         driver.execute_script("arguments[0].click();", recruiter)
         try:
             #normal confirm
-             send =  driver.find_element_by_xpath("//span[text()='Enviar invitación']").click()
+            send =  driver.find_element_by_xpath("//span[text()='Enviar invitación']").click()
         except:
             #close if email is requested
-            cerrar = driver.find_element_by_xpath("//button[aria-label='Descartar']").click()
-
+            ActionChains(driver).move_to_element(recruiter).click().perform()
 driver.close()
